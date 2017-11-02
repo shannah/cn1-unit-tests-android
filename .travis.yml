@@ -5,7 +5,6 @@ addons:
     packages:
       - ant
       - nodejs
-      - nodejs-legacy
       - npm
 android:
   components:
@@ -20,6 +19,8 @@ before_script:
   - adb shell input keyevent 82 &
 
 script:
+ - echo `which nodejs`
+ - echo `which node`
  - wget https://github.com/codenameone/cn1-binaries/archive/master.zip
  - unzip master.zip -d ../
  - mv ../cn1-binaries-master ../cn1-binaries
