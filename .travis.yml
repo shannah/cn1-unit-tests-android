@@ -4,7 +4,7 @@ jdk: oraclejdk8
 android:
   components:
     - platform-tools
-    - android-21
+    - android-22
     - sys-img-armeabi-v7a-android-22
 
 before_script:
