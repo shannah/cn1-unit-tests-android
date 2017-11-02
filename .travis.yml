@@ -1,6 +1,10 @@
 language: android
 jdk: oraclejdk8
-
+addons:
+  apt:
+    packages:
+      - ant
+      - npm
 android:
   components:
     - platform-tools
