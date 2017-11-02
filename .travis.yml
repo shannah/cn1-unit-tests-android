@@ -5,6 +5,7 @@ android:
   components:
     - platform-tools
     - android-21
+    - sys-img-armeabi-v7a-android-22
 
 before_script:
   - echo no | android create avd --force -n test -t android-22 --abi armeabi-v7a
