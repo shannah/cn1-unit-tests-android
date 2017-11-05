@@ -1,3 +1,6 @@
+branches:
+    only:
+        - 22
 language: android
 jdk: oraclejdk8
 addons:
@@ -7,13 +10,13 @@ addons:
 android:
   components:
     - platform-tools
-    - android-22
-    - sys-img-armeabi-v7a-android-22
+    - android-${TRAVIS_BRANCH}
+    - sys-img-armeabi-v7a-android-${TRAVIS_BRANCH}
 
 before_script:
   - nvm install 6
   - echo `which node`
-  - echo no | android create avd --force -n test -t android-22 --abi armeabi-v7a
+  - echo no | android create avd --force -n test -t android-${TRAVIS_BRANCH} --abi armeabi-v7a
   - emulator -avd test -no-audio -no-window &
   - android-wait-for-emulator
   - adb shell input keyevent 82 &
