@@ -12,8 +12,10 @@ addons:
       - ant
 android:
   components:
+    - tools
+    - tools
     - platform-tools
-    - android-${TRAVIS_BRANCH}
+    - android-24
     - sys-img-armeabi-v7a-android-${TRAVIS_BRANCH}
     - sys-img-armeabi-v7a-addon-google_apis-google-${TRAVIS_BRANCH}
 
