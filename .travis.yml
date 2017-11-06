@@ -23,8 +23,6 @@ addons:
       - ant
 android:
   components:
-    - tools
-    - build-tools-25.0.1
     - platform-tools
     - android-${TRAVIS_BRANCH}
     - sys-img-x86-android-${TRAVIS_BRANCH}
@@ -32,7 +30,7 @@ android:
 before_script:
   - nvm install 6
   - echo `which node`
-  - echo no | android create avd --force -n test -t android-${TRAVIS_BRANCH} --abi x86 -no-accel
+  - echo no | android create avd --force -n test -t android-${TRAVIS_BRANCH} --abi x86
   - emulator -avd test -no-audio -no-window &
   - android-wait-for-emulator
   - adb shell input keyevent 82 &
