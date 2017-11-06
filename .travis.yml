@@ -12,22 +12,20 @@ addons:
       - ant
 android:
   components:
-    - tools
-    - tools
     - platform-tools
-    - android-24
     - android-18
-    - build-tools-24.0.1
-    - extra-android-m2repository
     - sys-img-armeabi-v7a-android-18
 
 before_script:
   - nvm install 6
   - echo `which node`
-  - echo no | android create avd --force -n test -t android-${TRAVIS_BRANCH} --abi armeabi-v7a
+  - echo yes | android update sdk --filter platform-tools --no-ui --force > /dev/null
+  - echo yes | android update sdk --filter android-18 --no-ui --force > /dev/null
+  - echo yes | android update sdk --filter sysimg-18 --no-ui --force > /dev/null
+  - echo yes | android update sdk --filter extra-android-support --no-ui --force > /dev/null
+  - echo yes | android update sdk --filter extra-android-m2repository --no-ui --force > /dev/null
+  - echo no | android create avd --force -n test -t android-18 --abi armeabi-v7a
   - emulator -avd test -no-skin -no-audio -no-window &
-  - sh wait-for-emulator.sh
-  - adb shell input keyevent 82 &
 
 script:
  - wget https://github.com/codenameone/cn1-binaries/archive/master.zip
@@ -57,4 +55,6 @@ script:
  - mv ../cn1-unit-tests-master ../cn1-unit-tests
  - rm master.zip
  - cd ../cn1-unit-tests
+ - sh ../cn1-unit-tests-android/wait-for-emulator.sh
+ - adb shell input keyevent 82 &
  - ../codenameone-cli/node_modules/.bin/cn1 test -cn1Sources ../cn1 -s -e -t android -skipCompileCn1Sources -v
