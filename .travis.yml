@@ -17,6 +17,7 @@ env:
   global:
     - ANDROID_TARGET=android-23
     - ANDROID_ABI=armeabi-v7a
+    - ANDROID_TAG=google_apis
 addons:
   apt:
     packages:
@@ -25,12 +26,12 @@ android:
   components:
     - platform-tools
     - android-${TRAVIS_BRANCH}
-    - sys-img-armeabi-v7a-google_apis-${TRAVIS_BRANCH}
+    - sys-img-armeabi-v7a-google_apis-23
 
 before_script:
   - nvm install 6
   - echo `which node`
-  - echo no | android create avd --force -n test -t android-${TRAVIS_BRANCH} --abi armeabi-v7a
+  - echo no | android create avd --force -n test -t "Google Inc.:Google APIs:23" --abi $ANDROID_ABI
   - emulator -avd test -no-audio -no-window &
   - android-wait-for-emulator
   - adb shell input keyevent 82 &
