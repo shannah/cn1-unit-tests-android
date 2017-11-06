@@ -23,6 +23,8 @@ addons:
       - ant
 android:
   components:
+    - tools
+    - build-tools-25.0.1
     - platform-tools
     - android-${TRAVIS_BRANCH}
     - sys-img-x86-android-${TRAVIS_BRANCH}
