@@ -1,5 +1,6 @@
 branches:
     only:
+        - 19
         - 21
         - 22
 language: android
