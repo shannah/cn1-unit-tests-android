@@ -31,6 +31,7 @@ android:
 before_script:
   - nvm install 6
   - echo `which node`
+  - android list targets
   - echo no | android create avd --force -n test -t "Google Inc.:Google APIs:23" --abi $ANDROID_ABI
   - emulator -avd test -no-audio -no-window &
   - android-wait-for-emulator
