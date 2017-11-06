@@ -1,16 +1,9 @@
 branches:
     only:
-        - 15
-        - 16
-        - 17
         - 18
         - 19
-        - 20
         - 21
         - 22
-        - 23
-        - 24
-        - 25
 language: android
 jdk: oraclejdk8
 addons:
@@ -22,12 +15,13 @@ android:
     - platform-tools
     - android-${TRAVIS_BRANCH}
     - sys-img-armeabi-v7a-android-${TRAVIS_BRANCH}
+    - sys-img-armeabi-v7a-addon-google_apis-google-${TRAVIS_BRANCH}
 
 before_script:
   - nvm install 6
   - echo `which node`
   - echo no | android create avd --force -n test -t android-${TRAVIS_BRANCH} --abi armeabi-v7a
-  - emulator -avd test -no-audio -no-window &
+  - emulator -avd test -no-skin -no-audio -no-window &
   - android-wait-for-emulator
   - adb shell input keyevent 82 &
 
