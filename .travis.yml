@@ -15,7 +15,9 @@ android:
     - tools
     - tools
     - platform-tools
+    - platform-tools
     - android-24
+    - android-18
     - sys-img-armeabi-v7a-android-${TRAVIS_BRANCH}
     - sys-img-armeabi-v7a-addon-google_apis-google-${TRAVIS_BRANCH}
 
