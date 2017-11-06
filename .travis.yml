@@ -16,7 +16,7 @@ jdk: oraclejdk8
 env:
   global:
     - ANDROID_TARGET=android-23
-    - ANDROID_ABI=x86
+    - ANDROID_ABI=armeabi-v7a
 addons:
   apt:
     packages:
@@ -25,12 +25,12 @@ android:
   components:
     - platform-tools
     - android-${TRAVIS_BRANCH}
-    - sys-img-x86-android-${TRAVIS_BRANCH}
+    - sys-img-armeabi-v7a-google_apis-${TRAVIS_BRANCH}
 
 before_script:
   - nvm install 6
   - echo `which node`
-  - echo no | android create avd --force -n test -t android-${TRAVIS_BRANCH} --abi x86
+  - echo no | android create avd --force -n test -t android-${TRAVIS_BRANCH} --abi armeabi-v7a
   - emulator -avd test -no-audio -no-window &
   - android-wait-for-emulator
   - adb shell input keyevent 82 &
