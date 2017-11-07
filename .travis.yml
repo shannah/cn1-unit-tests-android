@@ -32,6 +32,7 @@ addons:
 android:
   components:
     - tools
+    - build-tools-25.0.2 # Match build-tools version used in build.gradle
     - platform-tools
     - tools
     - android-${TRAVIS_BRANCH}
@@ -41,6 +42,9 @@ android:
 
 before_script:
   - export EMULATOR="system-images;android-${API};${TAG};${ABI}" # Used to install/create emulator
+  - echo yes | sdkmanager "platforms;android-25" # Latest platform required by SDK tools
+  - echo yes | sdkmanager "platforms;android-${API}" # Android platform required by emulator
+  - echo yes | sdkmanager "$EMULATOR" # Install emulator system image
   - nvm install 6
   - echo `which node`
   - android list targets
