@@ -30,7 +30,7 @@ before_script:
   - echo `which node`
   - android list targets
   - echo no | android create avd --force -n test -t android-${TRAVIS_BRANCH} --abi google_apis/armeabi-v7a
-  - emulator -avd test -gpu host -no-window &
+  - emulator -avd test -gpu swiftshader -no-window &
 
 
 script:
