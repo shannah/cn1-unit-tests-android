@@ -23,14 +23,15 @@ android:
   components:
     - platform-tools
     - android-${TRAVIS_BRANCH}
-    - addon-google_apis-google-${TRAVIS_BRANCH}
-    - sys-img-armeabi-v7a-google_apis-${TRAVIS_BRANCH}
+    #- addon-google_apis-google-${TRAVIS_BRANCH}
+    #- sys-img-armeabi-v7a-google_apis-${TRAVIS_BRANCH}
+    - sys-img-armeabi-v7a-android-16
 
 before_script:
   - nvm install 6
   - echo `which node`
   - android list targets
-  - echo no | android create avd --force -n test -t "Google Inc.:Google APIs:16" --abi default/armeabi-v7a
+  - echo no | android create avd --force -n test -t android-16 --abi armeabi-v7a
   - emulator -avd test -no-window &
 
 script:
