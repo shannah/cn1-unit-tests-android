@@ -13,11 +13,6 @@ branches:
         - 25
 language: android
 jdk: oraclejdk8
-env:
-  global:
-    - ANDROID_TARGET=android-23
-    - ANDROID_ABI=armeabi-v7a
-    - ANDROID_TAG=google_apis
 addons:
   apt:
     packages:
@@ -26,16 +21,17 @@ android:
   components:
     - platform-tools
     - android-${TRAVIS_BRANCH}
-    - sys-img-armeabi-v7a-google_apis-23
+    - addon-google_apis-google-${TRAVIS_BRANCH}
+    - sys-img-armeabi-v7a-google_apis-${TRAVIS_BRANCH}
+
 
 before_script:
   - nvm install 6
   - echo `which node`
   - android list targets
-  - echo no | android create avd --force -n test -t android-23 --abi $ANDROID_ABI --tag $ANDROID_TAG
+  - echo no | android create avd --force -n test -t android-${TRAVIS_BRANCH} --abi google_apis/armeabi-v7a
   - emulator -avd test -no-window &
-  - android-wait-for-emulator
-  - adb shell input keyevent 82 &
+
 
 script:
  - wget https://github.com/codenameone/cn1-binaries/archive/master.zip
@@ -65,4 +61,6 @@ script:
  - mv ../cn1-unit-tests-master ../cn1-unit-tests
  - rm master.zip
  - cd ../cn1-unit-tests
+ - android-wait-for-emulator
+ - adb shell input keyevent 82 &
  - ../codenameone-cli/node_modules/.bin/cn1 test -cn1Sources ../cn1 -s -e -t android -skipCompileCn1Sources -v
