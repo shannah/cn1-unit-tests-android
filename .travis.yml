@@ -30,7 +30,7 @@ before_script:
   - nvm install 6
   - echo `which node`
   - android list targets
-  - echo no | android create avd --force -n test -t android-${TRAVIS_BRANCH} --abi default/armeabi-v7a
+  - echo no | android create avd --force -n test -t "Google Inc.:Google APIs:16" --abi default/armeabi-v7a
   - emulator -avd test -no-window &
 
 script:
