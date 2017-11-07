@@ -24,7 +24,7 @@ android:
     - platform-tools
     - android-${TRAVIS_BRANCH}
     - addon-google_apis-google-${TRAVIS_BRANCH}
-    - sys-img-armeabi-v7a-google_apis-18
+    - sys-img-armeabi-v7a-google_apis-${TRAVIS_BRANCH}
 
 before_script:
   - nvm install 6
