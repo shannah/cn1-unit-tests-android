@@ -13,24 +13,40 @@ branches:
         - 25
 language: android
 jdk: oraclejdk8
+env:
+  global:
+    - DIR=constraint-layout-start # Project directory
+    - API=23 # Android API level 25 by default
+    - TAG=google_apis # Google APIs by default, alternatively use default
+    - ABI=armeabi-v7a # ARM ABI v7a by default
+    - QEMU_AUDIO_DRV=none # Disable emulator audio to avoid warning
+    #- GRADLE_USER_HOME="${TRAVIS_BUILD_DIR}/gradle" # Change location for Gradle Wrapper and cache
+    #- ANDROID_HOME=/usr/local/android-sdk-24.0.2 # Depends on the cookbooks version used in the VM
+    #- TOOLS=${ANDROID_HOME}/tools # PATH order matters, exists more than one emulator script
+    #- PATH=${ANDROID_HOME}:${ANDROID_HOME}/emulator:${TOOLS}:${TOOLS}/bin:${ANDROID_HOME}/platform-tools:${PATH}
+    - ADB_INSTALL_TIMEOUT=20 # minutes (2 minutes by default)
 addons:
   apt:
     packages:
       - ant
 android:
   components:
+    - tools
     - platform-tools
+    - tools
     - android-${TRAVIS_BRANCH}
     - addon-google_apis-google-${TRAVIS_BRANCH}
     - sys-img-armeabi-v7a-google_apis-${TRAVIS_BRANCH}
 
 
 before_script:
+  - export EMULATOR="system-images;android-${API};${TAG};${ABI}" # Used to install/create emulator
   - nvm install 6
   - echo `which node`
   - android list targets
-  - echo no | android create avd --force -n test -t android-${TRAVIS_BRANCH} --abi google_apis/armeabi-v7a
-  - emulator -avd test -gpu swiftshader -no-window &
+  - echo no | android create avd --force -n test -k "$EMULATOR" --abi "$ABI" --tag="$TAG"
+  - emulator -avd test -engine classic -no-window -camera-back none -camera-front none -verbose -qemu -m 512 &
+  - adb wait-for-device get-serialno
 
 
 script:
@@ -62,5 +78,9 @@ script:
  - rm master.zip
  - cd ../cn1-unit-tests
  - android-wait-for-emulator
+ - adb shell settings put global window_animation_scale 0 &
+ - adb shell settings put global transition_animation_scale 0 &
+ - adb shell settings put global animator_duration_scale 0 &
+ - sleep 30
  - adb shell input keyevent 82 &
  - ../codenameone-cli/node_modules/.bin/cn1 test -cn1Sources ../cn1 -s -e -t android -skipCompileCn1Sources -v
