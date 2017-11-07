@@ -29,8 +29,8 @@ before_script:
   - nvm install 6
   - echo `which node`
   - android list targets
-  - echo no | android create avd --force -n test -t android-${TRAVIS_BRANCH} --abi google_apis/armeabi-v7a -gpu host
-  - emulator -avd test -no-window &
+  - echo no | android create avd --force -n test -t android-${TRAVIS_BRANCH} --abi google_apis/armeabi-v7a
+  - emulator -avd test -gpu host -no-window &
 
 
 script:
