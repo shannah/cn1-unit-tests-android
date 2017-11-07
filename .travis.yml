@@ -23,15 +23,15 @@ android:
   components:
     - platform-tools
     - android-${TRAVIS_BRANCH}
-    - sys-img-armeabi-v7a-android-${TRAVIS_BRANCH}
+    - addon-google_apis-google-${TRAVIS_BRANCH}
+    - sys-img-armeabi-v7a-google_apis-15
 
 before_script:
   - nvm install 6
   - echo `which node`
-  - echo no | android create avd --force -n test -t android-${TRAVIS_BRANCH} --abi armeabi-v7a
-  - emulator -avd test -no-audio -no-window &
-  - android-wait-for-emulator
-  - adb shell input keyevent 82 &
+  - android list targets
+  - echo no | android create avd --force -n test -t android-${TRAVIS_BRANCH} --abi google_apis/armeabi-v7a
+  - emulator -avd test -no-window &
 
 script:
  - wget https://github.com/codenameone/cn1-binaries/archive/master.zip
@@ -61,4 +61,7 @@ script:
  - mv ../cn1-unit-tests-master ../cn1-unit-tests
  - rm master.zip
  - cd ../cn1-unit-tests
+ #- sh ../cn1-unit-tests-android/wait-for-emulator.sh
+ - android-wait-for-emulator
+ - adb shell input keyevent 82 &
  - ../codenameone-cli/node_modules/.bin/cn1 test -cn1Sources ../cn1 -s -e -t android -skipCompileCn1Sources -v
