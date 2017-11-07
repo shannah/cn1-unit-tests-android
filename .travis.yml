@@ -44,7 +44,7 @@ before_script:
   - nvm install 6
   - echo `which node`
   - android list targets
-  - echo no | android create avd --force -n test -k "$EMULATOR" --abi "$ABI" --tag="$TAG"
+  - echo no | avdmanager create avd -n test -k "$EMULATOR" -f --abi "$ABI" --tag "$TAG"
   - emulator -avd test -engine classic -no-window -camera-back none -camera-front none -verbose -qemu -m 512 &
   - adb wait-for-device get-serialno
 
