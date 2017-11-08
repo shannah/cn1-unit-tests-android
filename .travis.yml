@@ -23,10 +23,11 @@ before_script:
   - echo `which node`
 
 script:
+ - cat `which android-wait-for-emulator`
  - wget https://dl.google.com/android/repository/platform-tools-latest-linux.zip
- - unzip platform-tools-latest-linux.zip -d ../
+ - unzip -q platform-tools-latest-linux.zip -d ../
  - wget https://dl.google.com/android/repository/sdk-tools-linux-3859397.zip
- - unzip sdk-tools-linux-3859397.zip -d ../
+ - unzip -q sdk-tools-linux-3859397.zip -d ../
  - echo yes | ../tools/bin/sdkmanager "tools"
  - echo yes | ../tools/bin/sdkmanager "platforms;android-25"
  - echo yes | ../tools/bin/sdkmanager "system-images;android-25;google_apis;x86"
@@ -37,16 +38,16 @@ script:
  - export PATH=`pwd`/tools:`pwd`/platform-tools:`pwd`/tools/bin:$PATH
  - cd cn1-unit-tests-android
  - wget https://github.com/codenameone/cn1-binaries/archive/master.zip
- - unzip master.zip -d ../
+ - unzip -q master.zip -d ../
  - mv ../cn1-binaries-master ../cn1-binaries
  - rm master.zip
  - wget https://github.com/codenameone/codenameone-skins/archive/master.zip
- - unzip master.zip -d ../
+ - unzip -q master.zip -d ../
  - mv ../codenameone-skins-master ../codenameone-skins
  - cd ../codenameone-skins
  - ./build_skins.sh
  - wget https://github.com/codenameone/CodenameOne/archive/master.zip
- - unzip master.zip -d ../
+ - unzip -q master.zip -d ../
  - mv ../CodenameOne-master ../cn1
  - cd ../cn1
  - cd CodenameOne
@@ -59,7 +60,7 @@ script:
  - cd ../../codenameone-cli
  - npm install codenameone-cli
  - wget https://github.com/shannah/cn1-unit-tests/archive/master.zip
- - unzip master.zip -d ../
+ - unzip -q master.zip -d ../
  - mv ../cn1-unit-tests-master ../cn1-unit-tests
  - rm master.zip
  - cd ../cn1-unit-tests
