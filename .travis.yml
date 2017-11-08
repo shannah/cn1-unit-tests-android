@@ -30,9 +30,9 @@ script:
  - unzip -q sdk-tools-linux-3859397.zip -d ../
  - echo yes | ../tools/bin/sdkmanager "tools"
  - echo yes | ../tools/bin/sdkmanager "platforms;android-25"
- - echo yes | ../tools/bin/sdkmanager "system-images;android-25;google_apis;x86"
+ - echo yes | ../tools/bin/sdkmanager "system-images;android-25;google_apis;armeabi-v7a"
  - echo yes | ../tools/bin/sdkmanager "emulator"
- - echo no | ../tools/bin/avdmanager create avd -k "system-images;android-25;google_apis;x86" -n test -f --tag google_apis --abi x86
+ - echo no | ../tools/bin/avdmanager create avd -k "system-images;android-25;google_apis;armeabi-v7a" -n test -f --tag google_apis --abi armeabi-v7a
  - ../tools/emulator -avd test -no-audio -no-window &
  - cd ..
  - export PATH=`pwd`/tools:`pwd`/platform-tools:`pwd`/tools/bin:$PATH
