@@ -48,7 +48,7 @@ adb shell settings put global transition_animation_scale 0 &
 adb shell settings put global animator_duration_scale 0 &
 sleep 30
 adb shell input keyevent 82 &
-../codenameone-cli/node_modules/.bin/cn1 test -cn1Sources ../cn1 -s -e -t android -skipCompileCn1Sources -v || exit 1
+travis_wait 30 ../codenameone-cli/node_modules/.bin/cn1 test -cn1Sources ../cn1 -s -e -t android -skipCompileCn1Sources -v || exit 1
 adb -s emulator-5554 emu kill
 kill $EMULATOR_PID
 exit 0
