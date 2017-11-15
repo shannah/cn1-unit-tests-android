@@ -16,4 +16,4 @@ env:
   - ANDROID_PLATFORM="platforms;android-25" ANDROID_SYSTEM_IMAGE="system-images;android-25;google_apis;armeabi-v7a" TAG="google_apis" ABI="armeabi-v7a"
 
 script:
-  - travis_wait 30 bash .travis/build-android.sh
+  - bash .travis/build-android.sh

@@ -49,7 +49,7 @@ function doBuild() {
   adb shell settings put global animator_duration_scale 0 &
   sleep 30
   adb shell input keyevent 82 &
-  ../codenameone-cli/node_modules/.bin/cn1 test -cn1Sources ../cn1 -s -e -t android -skipCompileCn1Sources -v || return 1
+  ../codenameone-cli/node_modules/.bin/cn1 test -cn1Sources ../cn1 -s -e -t android -skipCompileCn1Sources -v -p 60 || return 1
   return 0
 }
 
