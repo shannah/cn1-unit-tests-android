@@ -38,17 +38,22 @@ function doBuild() {
   mkdir ../../codenameone-cli || return 1
   cd ../../codenameone-cli || return 1
   npm install codenameone-cli || return 1
+  echo "wget https://github.com/shannah/cn1-unit-tests/archive/master.zip"
   wget https://github.com/shannah/cn1-unit-tests/archive/master.zip || return 1
+  echo "unzip -q master.zip -d ../"
   unzip -q master.zip -d ../ || return 1
   mv ../cn1-unit-tests-master ../cn1-unit-tests || return 1
   rm master.zip || return 1
   cd ../cn1-unit-tests || return 1
+  echo "bash ../cn1-unit-tests-android/.travis/android-waiting-for-emulator.sh"
   bash ../cn1-unit-tests-android/.travis/android-waiting-for-emulator.sh || return 1
   adb shell settings put global window_animation_scale 0 &
   adb shell settings put global transition_animation_scale 0 &
   adb shell settings put global animator_duration_scale 0 &
   sleep 30
+  echo "adb shell input keyevent 82 &"
   adb shell input keyevent 82 &
+  echo "../codenameone-cli/node_modules/.bin/cn1 test -cn1Sources ../cn1 -s -e -t android -skipCompileCn1Sources -v -p 60"
   ../codenameone-cli/node_modules/.bin/cn1 test -cn1Sources ../cn1 -s -e -t android -skipCompileCn1Sources -v -p 60 || return 1
   return 0
 }
