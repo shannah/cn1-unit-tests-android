@@ -13,6 +13,7 @@ echo yes | ../tools/bin/sdkmanager "${ANDROID_PLATFORM}" || exit 1
 #echo yes | ../tools/bin/sdkmanager "system-images;android-25;google_apis;armeabi-v7a"
 echo yes | ../tools/bin/sdkmanager "${ANDROID_SYSTEM_IMAGE}" || exit 1
 echo yes | ../tools/bin/sdkmanager "emulator" || exit 1
+echo yes | ../tools/bin/sdkmanager --update || exit 1
 #echo no | ../tools/bin/avdmanager create avd -k "system-images;android-25;google_apis;armeabi-v7a" -n test -f --tag google_apis --abi armeabi-v7a
 echo no | ../tools/bin/avdmanager create avd -k "${ANDROID_SYSTEM_IMAGE}" -n test -f --tag ${TAG} --abi ${ABI} || exit 1
 ../tools/emulator -avd test -no-audio -no-window -memory 2048 &
